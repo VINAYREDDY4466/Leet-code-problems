@@ -1,5 +1,5 @@
 class Solution {
-    public static void findcombinations(int index, int[] candidates, int target, List<List<Integer>> ans, List<Integer> ds ){
+    public static void findcombinations(int index, int[] candidates, int target, Set<List<Integer>> ans, List<Integer> ds ){
         if(index==candidates.length){
             if(target==0){
                 ans.add(new ArrayList<>(ds));
@@ -15,9 +15,13 @@ class Solution {
 
     }
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
-         ArrayList<List<Integer>> ans = new ArrayList<>();
+         HashSet<List<Integer>> ans = new HashSet<>();
          int index=0;
          findcombinations(index, candidates, target, ans,  new ArrayList<Integer>());
-         return ans;
+         List<List<Integer>> ans2= new ArrayList<>();
+         for(List<Integer> i: ans){
+              ans2.add(new ArrayList<>(i));
+         }
+         return ans2;
     }
 }
