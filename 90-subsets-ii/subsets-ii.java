@@ -15,11 +15,7 @@ class Solution {
         Arrays.sort(nums);
         ans.add(new ArrayList<>());
         findsubsets(index, nums, ans, new ArrayList<>());
-        ArrayList<List<Integer>>  ans2= new ArrayList<>();
-        for(List<Integer> i: ans){
-            ans2.add(i);
-        }
-        return ans2;
+        return new ArrayList<>(ans);
 
 
     }
