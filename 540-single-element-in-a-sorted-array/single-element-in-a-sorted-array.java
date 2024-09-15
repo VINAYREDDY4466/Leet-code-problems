@@ -1,17 +1,13 @@
 class Solution {
     public int singleNonDuplicate(int[] nums) {
-        HashMap<Integer, Integer> ans= new HashMap<>();
+       int ans=0;
         for(int i =0;i<nums.length;i++){
-            ans.put(nums[i], ans.getOrDefault(nums[i],0)+1);
+            ans= ans^nums[i];
         }
-       for(int key: ans.keySet()){
-        if(ans.get(key)==1){
-            return key;
-        }
-       }
+      
         
 
-        return -1;
+        return ans;
     }
     
 
