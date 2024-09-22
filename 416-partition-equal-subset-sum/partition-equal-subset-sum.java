@@ -1,21 +1,24 @@
 class Solution {
-    public boolean solve (int index, int[] arr, int[][]  dp, int target){
-        if(target==0){
-           return true;
+    public boolean solve (int index, int[] arr, int target){
+        boolean dp[][]=  new boolean[index][target+1];
+        for(int i =0; i<index;i++){
+            dp[i][0]=true;
         }
-        if(index==0){
-            return arr[index]==target;
+        if(arr[0]<=target){
+
+         dp[0][arr[0]]=true;
         }
-        if(dp[index][target]!=-1){
-            return dp[index][target]==0? false:true;
+        for(int i= 1; i< index;i++){
+            for(int tar =1; tar<=target;tar++){
+                boolean nottake = dp[i-1][tar];
+                boolean take =false;
+                if(arr[i]<=tar){
+                    take =dp[i-1][tar-arr[i]];
+                }
+                dp[i][tar]= nottake||take;
+            }
         }
-        boolean nottake= solve(index-1, arr, dp, target);
-        boolean take= false;
-        if(arr[index]<=target){
-            take= solve(index-1, arr, dp, target-arr[index]);
-        }
-        dp[index][target]=nottake||take?1:0;
-        return nottake||take;
+        return dp[index-1][target];
     }
     public boolean canPartition(int[] nums) {
         int n= nums.length;
@@ -27,11 +30,7 @@ class Solution {
             return false;
         }
         int t= k/2;
-        int[][] dp = new int[n][k+1];
-         for(int row[]: dp){
-            Arrays.fill(row, -1);
-         }
-         boolean ans= solve(n-1, nums, dp, t);
+         boolean ans= solve(n, nums, t);
          return ans;
     }
 
