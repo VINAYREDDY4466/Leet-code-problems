@@ -9,11 +9,11 @@ class Solution {
             if(g[r]<=s[l]){
                
                 r++;
-                ans++;
+                
             }
             l++;
         }
-        return ans;
+        return r;
         
     }
 }
