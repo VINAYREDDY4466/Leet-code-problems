@@ -3,32 +3,36 @@
 
 
 class Solution {
-    public int maxProfit(int[] prices) {
-        
-        int n = prices.length;
-        int [][][]dp = new int [n][2][3];
-        for(int [][] i: dp){
-            for(int [] j : i){
-                Arrays.fill(j,-1);
+    public int maxProfit(int[] arr) {
+       int n=arr.length;
+        int[][][] dp = new int[n][2][3];
+         for (int i = 0; i < n; i++) {
+            for (int j = 0; j < 2; j++) {
+                Arrays.fill(dp[i][j], -1);
             }
         }
-        return solve(0,n,0,2,prices,dp);
+        int ans = solve(arr, 0, 0, n, 2,dp);
+        return ans;
     }
-    int solve(int index, int n, int buy, int transaction, int [] prices, int [][][]dp){
-
-        if(index==n|| transaction==0) return 0;
-
-        if(dp[index][buy][transaction]!=-1) return dp[index][buy][transaction];
-
-        int profit =0;
-        if(buy ==0){
-            profit = Math.max(0+ solve(index+1,n,0,transaction,prices,dp),
-            -prices[index]+solve(index+1,n,1,transaction,prices,dp));
+    public int solve(int[]arr, int buy, int ind, int n, int cap , int[][][] dp){
+        if(cap==0||ind ==n){
+            return 0;
+        }
+        int op1=0;
+        int op2=0;
+        if(dp[ind][buy][cap]!=-1){
+            return dp[ind][buy][cap];
+        }
+        if(buy==0){
+        op1= 0+solve(arr, 0, ind+1, n, cap,dp);
+        op2= -arr[ind]+solve(arr, 1, ind+1, n, cap, dp);
         }
         if(buy==1){
-            profit = Math.max(0+solve(index+1,n,1,transaction,prices,dp),
-            prices[index] + solve(index+1,n,0,transaction-1,prices,dp));
+            op1=0+solve(arr, 1, ind+1, n, cap,dp);
+            op2=arr[ind]+solve(arr, 0, ind+1, n, cap-1, dp);
+
         }
-        return dp[index][buy][transaction] = profit;
+        dp[ind][buy][cap]=Math.max(op1, op2);
+        return Math.max(op1, op2);
     }
 }
