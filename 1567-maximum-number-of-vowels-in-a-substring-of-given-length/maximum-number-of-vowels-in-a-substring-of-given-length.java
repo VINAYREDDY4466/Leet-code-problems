@@ -1,13 +1,12 @@
 class Solution {
     public int maxVowels(String s, int k) {
-        int vowelcount=0;
+        int vowelcount =0;
         for(int i=0;i<k;i++){
             if(checkvowel(s.charAt(i))){
                 vowelcount++;
             }
         }
-        int maxvowel=0;
-        maxvowel=vowelcount;
+        int max=vowelcount;
         for(int i=k;i<s.length();i++){
             if(checkvowel(s.charAt(i))){
                 vowelcount++;
@@ -15,11 +14,11 @@ class Solution {
             if(checkvowel(s.charAt(i-k))){
                 vowelcount--;
             }
-            maxvowel= Math.max(maxvowel, vowelcount);
+            max=Math.max(max, vowelcount);
         }
-        return maxvowel;
+        return max;
     }
-    public static boolean checkvowel(char c){
-        return c=='a'||c=='e'||c=='i'||c=='o'||c=='u';  
+    public boolean checkvowel(char c){
+        return c=='a'||c=='e'||c=='i'||c=='o'||c=='u';
     }
 }
