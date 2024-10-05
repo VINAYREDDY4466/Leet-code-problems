@@ -1,42 +1,29 @@
-import java.util.*;
-
 class Solution {
     public List<List<Integer>> findDifference(int[] nums1, int[] nums2) {
-        // Use HashSet to track unique elements
-        HashSet<Integer> set1 = new HashSet<>();
-        HashSet<Integer> set2 = new HashSet<>();
-        
-        // Add all elements from nums1 to set1
-        for (int num : nums1) {
-            set1.add(num);
-        }
-        
-        // Add all elements from nums2 to set2
-        for (int num : nums2) {
-            set2.add(num);
-        }
+        HashSet<Integer> ans1= new HashSet<>();
+        HashSet<Integer> ans2= new HashSet<>();
+        for(int i: nums1){
+            ans1.add(i);
 
-        // Find elements in nums1 that are not in nums2
-        List<Integer> diff1 = new ArrayList<>();
-        for (int num : nums1) {
-            if (!set2.contains(num)&&!diff1.contains(num)) {
-                diff1.add(num);
+        }
+        for(int i : nums2){
+            ans2.add(i);
+        }
+        List<Integer> res1=new ArrayList<>();
+        List<Integer> res2=new ArrayList<>();
+        for(int i : nums1){
+            if(!ans2.contains(i)&&!res1.contains(i)){
+                res1.add(i);
             }
         }
-        
-        // Find elements in nums2 that are not in nums1
-        List<Integer> diff2 = new ArrayList<>();
-        for (int num : nums2) {
-            if (!set1.contains(num)&&!diff2.contains(num)) {
-                diff2.add(num);
+        for(int i: nums2){
+            if(!ans1.contains(i)&&!res2.contains(i)){
+                res2.add(i);
             }
         }
-
-        // Prepare the result list
-        List<List<Integer>> res = new ArrayList<>();
-        res.add(diff1);  // First list: elements in nums1 but not in nums2
-        res.add(diff2);  // Second list: elements in nums2 but not in nums1
-
+        List<List<Integer>> res= new ArrayList<>();
+        res.add(res1);
+        res.add(res2);
         return res;
     }
 }
