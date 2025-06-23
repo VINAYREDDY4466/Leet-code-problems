@@ -1,0 +1,22 @@
+class Solution {
+    public int arithmeticTriplets(int[] nums, int diff) {
+        int n= nums.length;
+        int c=0;
+        for(int i=0;i<n-2;i++){
+            for(int j=i+1;j<n-1;j++){
+                for(int k=j+1;k<n;k++){
+                     if(countTriplet(i,j,k, diff, nums)){
+                        c++;
+                     }
+                }
+            }
+        }
+        return c;
+    }
+    public boolean countTriplet(int i, int j,int k, int diff, int[] arr){
+          if(arr[j]-arr[i]==diff && arr[k]-arr[j]==diff){
+             return true;
+          }
+          return false;
+    }
+}
