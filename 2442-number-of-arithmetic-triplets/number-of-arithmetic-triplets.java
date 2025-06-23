@@ -2,14 +2,20 @@ class Solution {
     public int arithmeticTriplets(int[] nums, int diff) {
         int n= nums.length;
         int c=0;
-        for(int i=0;i<n-2;i++){
-            for(int j=i+1;j<n-1;j++){
-                for(int k=j+1;k<n;k++){
-                     if(countTriplet(i,j,k, diff, nums)){
-                        c++;
-                     }
+        int left=0;
+        while(left<n-2){
+           int left1=left+1;
+           while(left1<n-1){
+            int left2= left1+1;
+            while(left2<n){
+                if(countTriplet(left,left1, left2, diff, nums)){
+                    c++;
                 }
+                left2++;
             }
+            left1++;
+           }
+           left++;
         }
         return c;
     }
